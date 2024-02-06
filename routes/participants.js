@@ -3,10 +3,10 @@ var router = express.Router();
 const CyclicDb = require("@cyclic.sh/dynamodb");
 const db = CyclicDb(process.env.CYCLIC_DB);
 const Participants = db.collection("participants");
-const { auth } = require("../middleware/auth");
 
 const validateInput = require("../public/javascripts/validateInput");
 
+// returns all participants in the database
 router.get("/", async (req, res) => {
   try {
     let item = await Participants.list();
@@ -17,26 +17,25 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ikke ferdig
-//returning the personal details of all active participants (including first name and last name).
+// Returning the personal details of all active participants
 router.get("/details", async (req, res) => {
   try {
-    let list = await Participants.list();
-    res.json(list);
+    let activeUsers = await Participants.filter({ active: true });
+    res.status(200).json({ status: "success", data: activeUsers });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// ikke ferdig
+// Returns soft-deleted participants from the database.
 router.get("/details/deleted", async (req, res) => {
   try {
-    let deletedUsers = await Participants.item("email").fragment("work").get();
-    res.json(deletedUsers);
+    let deletedUsers = await Participants.filter({ active: false });
+    res.status(200).json({ status: "success", data: deletedUsers });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
@@ -121,15 +120,17 @@ router.post("/add", async function (req, res, next) {
   }
 });
 
-// Deletes a participant from the database.
-router.delete("/delete/:email", async (req, res) => {
+// Soft-Deletes a participant from the database.
+router.delete("/:email", async (req, res) => {
   try {
     const email = req.params.email;
     const participant = await Participants.get(email);
     if (!participant) {
       return res.status(404).json({ error: "Participant not found" });
     }
-    await Participants.delete(email);
+    await Participants.set(email, {
+      active: false,
+    });
     res.status(200).json({ status: "success", data: "Participant deleted" });
   } catch (err) {
     console.error(err);
