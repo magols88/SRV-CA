@@ -9,6 +9,7 @@ function validateInput(input) {
   if (!emailRegex.test(email)) {
     return { error: "Invalid email format" };
   }
+
   // Validate firstName
   if (!firstName) {
     return { error: "First name is required" };
