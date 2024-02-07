@@ -5,6 +5,7 @@ function validateInput(input) {
   if (!email) {
     return { error: "Email is required" };
   }
+  //  Validate Email regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return { error: "Invalid email format" };

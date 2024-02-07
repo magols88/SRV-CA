@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User List</title>
+  </head>
+  <body>
+    <h1>User List</h1>
+    <ul>
+      <% activeUsers.forEach(function(user) { %>
+      <li><%= user.key %></li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

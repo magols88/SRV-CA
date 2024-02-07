@@ -37,3 +37,19 @@ npm start
 - `POST /participants/add`: Adds a new participant.
 - `DELETE /participants/:email`: Soft-deletes the participant with the provided email.
 - `PUT /participants/:email`: Updates the participant with the provided email.
+
+## .env
+
+```bash
+CYCLIC_DB=lonely-clam-slacksCyclicDB
+CYCLIC_APP_ID=lonely-clam-slacks
+CYCLIC_APP_SECRET='14e1f834bc15b82421ed802b9518041eaebc3722f3e6a3392986c0551f6706dc9c6ca761bb6f5444ba19bf2242fa34e90be16b58333eb1684f39a12f0b190d30'
+```
+
+## Cyclic.sh app
+
+- https://lonely-clam-slacks.cyclic.app/
+
+## Postman Documentation
+
+- https://documenter.getpostman.com/view/30423924/2s9Yyy9K6A
