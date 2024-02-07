@@ -21,10 +21,14 @@ npm install
 
 # Start the application
 
-```bash
+````bash
 npm start
 
-```
+For example, to get the details of a specific participant:
+
+```bash
+curl http://localhost:3000/participants/details/johnny@example.com
+````
 
 ## API Endpoints
 
@@ -48,7 +52,7 @@ CYCLIC_APP_SECRET='14e1f834bc15b82421ed802b9518041eaebc3722f3e6a3392986c0551f670
 
 ## Cyclic.sh app
 
-- https://lonely-clam-slacks.cyclic.app/
+curl https://lonely-clam-slacks.cyclic.app/
 
 ## Postman Documentation
 
