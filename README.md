@@ -21,14 +21,15 @@ npm install
 
 # Start the application
 
-````bash
+```bash
 npm start
+```
 
 For example, to get the details of a specific participant:
 
 ```bash
 curl http://localhost:3000/participants/details/johnny@example.com
-````
+```
 
 ## API Endpoints
 
